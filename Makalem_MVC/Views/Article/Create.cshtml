@@ -1,0 +1,68 @@
+﻿@model ArticleSubjectVM
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Article</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.Article.Title" class="control-label"></label>
+                <input asp-for="@Model.Article.Title" class="form-control" />
+                <span asp-validation-for="@Model.Article.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Article.Content" class="control-label"></label>
+                <input asp-for="@Model.Article.Content" class="form-control" />
+                <span asp-validation-for="@Model.Article.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Article.ReadCount" class="control-label"></label>
+                <input asp-for="@Model.Article.ReadCount" class="form-control" />
+                <span asp-validation-for="@Model.Article.ReadCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Article.WritedDate" class="control-label"></label>
+                <input asp-for="@Model.Article.WritedDate" class="form-control" />
+                <span asp-validation-for="@Model.Article.WritedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Article.ReadingTime" class="control-label"></label>
+                <input asp-for="@Model.Article.ReadingTime" class="form-control" />
+                <span asp-validation-for="@Model.Article.ReadingTime" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="@Model.Article.UserId" value="@Context.Session.GetInt32("id")" />
+
+            @*Makale konularla yüklenemiyor Düzeltilecek*@
+            <div class="form-group">
+                <label class="control-label">Konular</label>
+                <select asp-for="@Model.Subjects" class="form-control">
+                    @{
+                        foreach (var item in Model.Subjects)
+                        {
+                            <option value="@item">@item.SubjectName</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

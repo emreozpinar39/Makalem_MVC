@@ -1,4 +1,8 @@
+using Makalem.BLL.Services.Abstract;
+using Makalem.BLL.Services.Concrete;
 using Makalem.DAL;
+using Makalem.DAL.Repositories.Abstract;
+using Makalem.DAL.Repositories.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 
@@ -13,6 +17,21 @@ builder.Services.AddSession();
 /*----------------------------------*/
 
 builder.Services.AddDbContext<ApplicationDbContext>();
+
+
+/*---------------Service--------------------*/
+builder.Services.AddScoped(typeof(IService<>), typeof(GenericService<>));
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IArticleService, ArticleService>();
+/*-------------------------------------------*/
+
+
+
+/*----------------DAL------------------*/
+builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
+/*----------------------------------*/
 
 
 
