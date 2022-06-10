@@ -10,5 +10,6 @@ namespace Makalem_MVC.Models
     {
         public Article Article { get; set; }
         public IEnumerable<Subject> Subjects { get; set; }
+        public List<int> Ids { get; set; }
     }
 }

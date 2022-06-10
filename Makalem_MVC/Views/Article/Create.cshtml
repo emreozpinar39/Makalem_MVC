@@ -40,14 +40,14 @@
             </div>
             <input type="hidden" asp-for="@Model.Article.UserId" value="@Context.Session.GetInt32("id")" />
 
-            @*Makale konularla yüklenemiyor Düzeltilecek*@
+            
             <div class="form-group">
                 <label class="control-label">Konular</label>
-                <select asp-for="@Model.Subjects" class="form-control">
+                <select asp-for="@Model.Ids" class="form-control">
                     @{
                         foreach (var item in Model.Subjects)
                         {
-                            <option value="@item">@item.SubjectName</option>
+                            <option value="@item.Id">@item.SubjectName</option>
                         }
                     }
                 </select>

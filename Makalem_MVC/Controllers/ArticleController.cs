@@ -49,7 +49,13 @@ namespace Makalem_MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ArticleSubjectVM articleSubjectVM)
         {
-
+            List<Subject> subjects = new List<Subject>();
+            foreach (int item in articleSubjectVM.Ids)
+            {
+                Subject subject = subjectService.GetById(item);
+                subjects.Add(subject);
+            }
+            articleSubjectVM.Article.Subject = subjects;
             service.Add(articleSubjectVM.Article);
             return RedirectToAction(nameof(Index));
         }
