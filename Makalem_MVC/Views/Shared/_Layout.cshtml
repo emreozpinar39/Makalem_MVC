@@ -4,77 +4,98 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Makalem_MVC</title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+
+    
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #204E5F; margin-top: 20px;">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Makalem_MVC</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" 
+                    aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active" style="padding-left:5px">
+                            <a class="btn btn-outline-info" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="nav-item" style="padding-left:5px">
+                            <a class="btn btn-outline-info" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Yazarlarımız</a>
+                        <li class="nav-item" style="padding-left:5px">
+                            <a class="btn btn-outline-info" asp-area="" asp-controller="User" asp-action="Index">Yazarlarımız</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Article" asp-action="Index">Makaleler</a>
+                        <li class="nav-item" style="padding-left:5px">
+                            <a class="btn btn-outline-info" asp-area="" asp-controller="Article" asp-action="Index">Makaleler</a>
                         </li>
 
-                        @if (Context.Session.GetString("ad") == null)
+                        @if (Context.Session.GetString("ad") == "admin")
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Log In</a>
+                            <li class="nav-item" style="padding-left:5px">
+                                <a class="btn btn-outline-info" asp-area="" asp-controller="Subject" asp-action="Index">Konu Listesi</a>
+                            </li>
+                            <li class="nav-item" style="padding-left:5px">
+                                <a class="btn btn-outline-info" asp-area="" asp-controller="User" asp-action="Admin">Yönetici Sayfası</a>
                             </li>
                         }
-                        else
+                        @if(Context.Session.GetString("ad") != null)
                         {
-                            @if (Context.Session.GetString("ad") == "admin")
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Subject" asp-action="Index">Konu Listesi</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Admin">Yönetici Sayfası</a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Writer">Kendi Sayfam</a>
-                                </li>
-                            }
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout">Log Out</a>
+                            <li class="nav-item" style="padding-left:5px">
+                                <a class="btn btn-outline-info" asp-area="" asp-controller="User" asp-action="Writer">Kendi Sayfam</a>
                             </li>
                         }
+                        
                     </ul>
                 </div>
+                
+                @if (Context.Session.GetString("ad") == null)
+                {
+                    <a class="btn btn-outline-info" asp-area="" asp-controller="User" asp-action="Login">Log In</a>
+                }
+                else
+                {
+                    <a class="btn btn-outline-info" asp-area="" asp-controller="User" asp-action="Logout">Log Out</a>
+                }
             </div>
         </nav>
     </header>
+
+    @if (ViewData["Title"] == "Ana Sayfa")
+    {
+      <div class="jumbotron" style="margin-top: 20px;">
+        <div class="container">
+            <h1 class="display-4" style="color: #79A7A8;"><b>Hoşgeldiniz</b></h1>
+            <p style="color: #204E5F; font-size:30px">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <hr class="my-4">
+            <p style="color: #204E5F; font-size:20px">It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            <a class="btn btn-outline-info " href="#" role="button">Learn more</a>
+        </div>
+      </div>
+        
+    }
+
+
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer mt-auto py-3">
         <div class="container">
-            &copy; 2022 - Makalem_MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <span class="text-muted">&copy; 2022 - Makalem_MVC -</span>
+            <a asp-area="" asp-controller="Home" asp-action="Index">Anasayfa</a>
         </div>
     </footer>
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
